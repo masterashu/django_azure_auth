@@ -1,0 +1,3 @@
+include README.md
+recursive-include azure_auth/static *
+recursive-include azure_auth/templates *

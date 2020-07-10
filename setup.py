@@ -4,6 +4,9 @@ setup(
     name="django-azure-auth",
     version="0.1.0",
     packages=find_packages(),
+    package_data={
+        "": ["*.html"]
+    },
     url="https://github.com/masterashu/django_azure_auth",
     license="MIT",
     author="Ashutosh",

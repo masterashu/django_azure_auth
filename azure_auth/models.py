@@ -20,7 +20,7 @@ class CustomUserManager(BaseUserManager):
         user.save()
 
     @staticmethod
-    def check_email_availability(self, email: str):
+    def check_email_availability(email: str):
         domain = settings.AZURE_APP.get("DOMAIN")
         if not email.endswith(domain):
             email += domain
@@ -67,6 +67,17 @@ class User(AbstractBaseUser):
             return result
         else:
             raise Exception
+
+    def sync_from_ad(self):
+        from .graph_api import GraphApi
+        g = GraphApi()
+        new_data = g.user.get(self.email)
+        if 'error' in new_data:
+            return
+        self.first_name = new_data.get('givenName')
+        self.last_name = new_data.get('surname')
+        self.email = new_data.get('userPrincipalName')
+        self.save()
 
 
 def get_user_model():

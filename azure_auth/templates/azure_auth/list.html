@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <style>
+        thead{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2>User List</h2>
+{% if errors %}
+    {{ errors }}
+{% endif %}
+<table border="1">
+    <thead>
+    <tr>
+        <td>Email</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Job Title</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+    </thead>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.userPrincipalName }}</td>
+            <td>{{ user.givenName }}</td>
+            <td>{{ user.surname }}</td>
+            <td>{{ user.jobTitle }}</td>
+            <td><a href="{% url 'azure_auth:update' user.id %}">
+                Edit
+            </a></td>
+            <td><form method="post" action="{% url 'azure_auth:delete' user.id %}">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+            </form></td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
