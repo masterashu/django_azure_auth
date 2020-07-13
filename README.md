@@ -49,7 +49,11 @@ Run `pip install` in your project enviornment to download the package.
         path('', include('azure_auth.urls')),
     ]
     ```
-
-
+4. Run migrations
+   ```
+   python manage.py migrate azure_app
+   python manage.py migrate
+   ```
+   
 ## Customization  
 
