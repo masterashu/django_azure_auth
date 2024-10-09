@@ -1,4 +1,4 @@
-Django==3.1.13
+Django==4.2.16
 msal==1.4.1
 setuptools==65.5.1
 black==19.10b0
